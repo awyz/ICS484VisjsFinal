@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICS 484: 2D Vis.js Demo</title>
+
+    <script type="text/javascript" src="visjs/vis.min.js"></script>
+    <link href="visjs/vis.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+
+</head>
+<body onload="drawVisualization()">
+
+<h1 style="font-size: 50px; text-align: center;">
+    ICS 484: Visjs Demo
+</h1>
+
+&nbsp;
+<h1 style="text-align: center">Line Chart</h1>
+<div id="visualization"></div>
+
+<pre class="prettyprint" style="padding-left: 35%">
+
+    var items1 = [
+        {x: '2014-06-11', y: 10},
+        {x: '2014-06-12', y:25},
+        {x: '2014-06-13', y:30},
+        {x: '2014-06-14', y:10},
+        {x: '2014-06-15', y:15},
+        {x: '2014-06-16', y:30}
+    ]
+
+    var dataset1 = new vis.DataSet(items1);
+
+    var options1 = {
+        start: '2014-06-10',
+        end: '2014-06-18'
+    }
+
+    var container1 = document.getElementById('visualization');
+
+    var graph2d = new vis.Graph2d(container1, dataset1, options1);
+
+</pre><br>
+&nbsp;
+<h1 style="text-align: center">Bar Graph</h1>
+<div id="visualization2"></div>
+
+<pre class="prettyprint" style="padding-left: 35%;"><br>
+
+    var container2 = document.getElementById('visualization2');
+    var items2 = [
+        {x: '2014-06-11', y: 10},
+        {x: '2014-06-12', y: 25},
+        {x: '2014-06-13', y: 30},
+        {x: '2014-06-14', y: 10},
+        {x: '2014-06-15', y: 15},
+        {x: '2014-06-16', y: 30}
+    ];
+
+    var dataset2 = new vis.DataSet(items2);
+    var options2 = {
+        style:'bar',
+        barChart: {width:50, align:'center'}, // align: left, center, right
+        drawPoints: false,
+        dataAxis: {
+            icons:true
+        },
+        orientation:'top',
+        start: '2014-06-10',
+        end: '2014-06-18'
+    };
+    var graph2d2 = new vis.Graph2d(container2, dataset2, options2);
+</pre>
+<br>
+
+&nbsp;
+<h1 style="text-align: center">Interpolation Graph</h1>
+<div id="visualization3"></div>
+
+<pre class="prettyprint" style="padding-left:35%;">
+
+    var names = ['centripetal', 'chordal', 'uniform', 'disabled'];
+    var groups = new vis.DataSet();
+    groups.add({
+        id: 0,
+        content: names[0],
+        options: {
+            drawPoints: false,
+            interpolation: {
+                parametrization: 'centripetal'
+            }
+        }});
+
+    groups.add({
+        id: 1,
+        content: names[1],
+        options: {
+            drawPoints: false,
+            interpolation: {
+                parametrization: 'chordal'
+            }
+        }});
+
+    groups.add({
+        id: 2,
+        content: names[2],
+        options: {
+            drawPoints: false,
+            interpolation: {
+                parametrization: 'uniform'
+            }
+        }
+    });
+
+    groups.add({
+        id: 3,
+        content: names[3],
+        options: {
+            drawPoints: { style: 'circle' },
+            interpolation: false
+        }});
+
+    var container3 = document.getElementById('visualization3');
+    var dataset3 = new vis.DataSet();
+    for (var i = 0; i < names.length; i++) {
+        dataset3.add( [
+            {x: '2014-06-12', y: 0 , group: i},
+            {x: '2014-06-13', y: 40, group: i},
+            {x: '2014-06-14', y: 10, group: i},
+            {x: '2014-06-15', y: 15, group: i},
+            {x: '2014-06-15', y: 30, group: i},
+            {x: '2014-06-17', y: 10, group: i},
+            {x: '2014-06-18', y: 15, group: i},
+            {x: '2014-06-19', y: 52, group: i},
+            {x: '2014-06-20', y: 10, group: i},
+            {x: '2014-06-21', y: 20, group: i}
+        ]);
+    }
+
+    var options3 = {
+        drawPoints: false,
+        dataAxis: {visible: false},
+        legend: true,
+        start: '2014-06-11',
+        end: '2014-06-22'
+    };
+    var graph2d = new vis.Graph2d(container3, dataset3, groups, options3);
+
+</pre><br>
+
+<!-- 3D Graph stuff -->
+&nbsp;
+<a style="text-align: center" href="https://awyz.github.io/ICS484VisjsFinal/network.html">3D Summary Graph</a><br>
+&nbsp;<a style="text-align: center;" href="https://awyz.github.io/ICS484VisjsFinal/3d.html">Network Graph</a>
+
+</body>
+
+<script type="text/javascript">
+
+    ////////////////////////////////////////////////////////////////////////////////
+    //                              LINE GRAPH                                    //
+    ////////////////////////////////////////////////////////////////////////////////
+
+    var items1 = [
+        {x: '2014-06-11', y: 10},
+        {x: '2014-06-12', y:25},
+        {x: '2014-06-13', y:30},
+        {x: '2014-06-14', y:10},
+        {x: '2014-06-15', y:15},
+        {x: '2014-06-16', y:30}
+    ]
+
+    var dataset1 = new vis.DataSet(items1);
+
+    var options1 = {
+        start: '2014-06-10',
+        end: '2014-06-18'
+    }
+
+    var container1 = document.getElementById('visualization');
+
+    var graph2d = new vis.Graph2d(container1, dataset1, options1);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    //                               BAR GRAPH                                    //
+    ////////////////////////////////////////////////////////////////////////////////
+
+    var container2 = document.getElementById('visualization2');
+    var items2 = [
+        {x: '2014-06-11', y: 10},
+        {x: '2014-06-12', y: 25},
+        {x: '2014-06-13', y: 30},
+        {x: '2014-06-14', y: 10},
+        {x: '2014-06-15', y: 15},
+        {x: '2014-06-16', y: 30}
+    ];
+
+    var dataset2 = new vis.DataSet(items2);
+    var options2 = {
+        style:'bar',
+        barChart: {width:50, align:'center'}, // align: left, center, right
+        drawPoints: false,
+        dataAxis: {
+            icons:true
+        },
+        orientation:'top',
+        start: '2014-06-10',
+        end: '2014-06-18'
+    };
+    var graph2d2 = new vis.Graph2d(container2, dataset2, options2);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    //                          INTERPOLATION GRAPH                               //
+    ////////////////////////////////////////////////////////////////////////////////
+
+    var names = ['centripetal', 'chordal', 'uniform', 'disabled'];
+    var groups = new vis.DataSet();
+    groups.add({
+        id: 0,
+        content: names[0],
+        options: {
+            drawPoints: false,
+            interpolation: {
+                parametrization: 'centripetal'
+            }
+        }});
+
+    groups.add({
+        id: 1,
+        content: names[1],
+        options: {
+            drawPoints: false,
+            interpolation: {
+                parametrization: 'chordal'
+            }
+        }});
+
+    groups.add({
+        id: 2,
+        content: names[2],
+        options: {
+            drawPoints: false,
+            interpolation: {
+                parametrization: 'uniform'
+            }
+        }
+    });
+
+    groups.add({
+        id: 3,
+        content: names[3],
+        options: {
+            drawPoints: { style: 'circle' },
+            interpolation: false
+        }});
+
+    var container3 = document.getElementById('visualization3');
+    var dataset3 = new vis.DataSet();
+    for (var i = 0; i < names.length; i++) {
+        dataset3.add( [
+            {x: '2014-06-12', y: 0 , group: i},
+            {x: '2014-06-13', y: 40, group: i},
+            {x: '2014-06-14', y: 10, group: i},
+            {x: '2014-06-15', y: 15, group: i},
+            {x: '2014-06-15', y: 30, group: i},
+            {x: '2014-06-17', y: 10, group: i},
+            {x: '2014-06-18', y: 15, group: i},
+            {x: '2014-06-19', y: 52, group: i},
+            {x: '2014-06-20', y: 10, group: i},
+            {x: '2014-06-21', y: 20, group: i}
+        ]);
+    }
+
+    var options3 = {
+        drawPoints: false,
+        dataAxis: {visible: false},
+        legend: true,
+        start: '2014-06-11',
+        end: '2014-06-22'
+    };
+    var graph2d = new vis.Graph2d(container3, dataset3, groups, options3);
+
+
+
+</script>
+
+</html>
+
